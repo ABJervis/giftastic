@@ -1,0 +1,10 @@
+
+body{
+    background: url("/assets/images/stardust.png");
+    color: rgb(27, 213, 226)
+   
+}
+
+button, div, form, input {
+    margin: 10px
+}
