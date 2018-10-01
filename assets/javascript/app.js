@@ -29,7 +29,7 @@ function displayInfo(){
             
                 //create a div for the gif
             
-                var gifDiv = $("<div>");
+                var gifDiv = $('<div class="moving">');
             
                 //stores result item's rating
             
@@ -45,17 +45,17 @@ function displayInfo(){
             
                 //gives image tag src attribute of a property pulled from the result item
             
-                instrumentImage.attr('src', results[i].images.fixed_height_still.url)
-                .attr('data-still', results[i].images.fixed_height_still.url)
-                .attr('data-animate', results[i].images.fixed_height.url)
-                .attr('data-state', "still")
-                .addClass("image-go");
-                //need to append the paragraph, image
+                instrumentImage.attr('src', results[i].images.fixed_height_still.url);
+                instrumentImage.attr("height", "250px");
+                instrumentImage.attr("width", "300px");
+                instrumentImage.attr('data-still', results[i].images.fixed_height_still.url);
+                instrumentImage.attr('data-animate', results[i].images.fixed_height.url);
+                instrumentImage.attr('data-state', 'still');
+                instrumentImage.attr("class", "gif");
+                //need to append the paragraph so the rating shows below the image, append image to be on top, prepend the #music-instrument to have current selection at the top
             
                 gifDiv.append(p);
-                gifDiv.append(instrumentImage);
-            
-                //PREPEND gifDiv to HTML so it appears first 
+                gifDiv.prepend(instrumentImage);
             
                 $("#music-instrument").prepend(gifDiv);
 
@@ -95,9 +95,11 @@ $("#music-add").on("click", function (event){
 
 //still to animate - need to tie to a click function
 
-$(document).on("click",".instrument-btn", displayInfo); 
+$(document).on("click",".instrument-btn", displayInfo);
 
-function getMoving(){
+
+$(document).on("click", ".gif", function(){
+     console.log("Gif clicked");
     //get or set the value of any attribute on html
     var state = $(this).attr("data-state");
     //checks current state of image, still or not, updates its src attribute to what its data-animate value is
@@ -109,10 +111,9 @@ function getMoving(){
         $(this).attr("data-state", "still");
 
     }
+});
 
-    console.log(state)
 
-}
 
 
 createButtons();
